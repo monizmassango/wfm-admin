@@ -1,0 +1,72 @@
+<div class=" content">
+  <button class=" btn btn-fill btn-danger float-right" routerLink="/nova-vaga">Inserir vaga</button>
+  <div class="clearfix"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmação</h4>
+        </div>
+        <div class="modal-body">
+          <p>Têm certeza que remover {{name}} </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="closePopup()">
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-danger float-right" (click)="remove(removeID)">
+            Remover
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Todas Vagas</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Titulo</th>
+                  <th>Empresa</th>
+                  <th>Data limite</th>
+                  <th class=" text-center">Acções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vaga of vagas; let i = index">
+                  <td>{{vaga.title}}</td>
+                  <td>{{vaga.nomeEmpresa}}</td>
+                  <td>{{vaga.endDate | date: 'dd/MM/yyyy'}}</td>
+                  <td class=" text-center">
+                    <div data-toggle="buttons" class="btn-group btn-group-toggle">
+                      <label class="btn btn-sm btn-warning btn-simple" [routerLink]="['/nova-vaga', vaga.id]">
+                        <input name="options" type="radio" class="d-none d-sm-none">
+                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Editar</span>
+                        <span class="d-block d-sm-none">
+                          <i class="tim-icons icon-gift-2"></i>
+                        </span>
+                      </label>
+                      <label class="btn btn-sm btn-danger btn-simple"><input name="options" type="radio" class="d-none"
+                          (click)="openPopup(vaga.title,vaga.id, i)"><span
+                          class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          remover
+                        </span><span class="d-block d-sm-none"><i class="tim-icons icon-tap-02"></i></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
