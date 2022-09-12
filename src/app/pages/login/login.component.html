@@ -1,0 +1,31 @@
+<div class=" login">
+  <div class=" row">
+    <div class=" col-md-9">
+      <form [formGroup]="loginForm">
+        <div class=" row">
+          <div class=" col-md-12 pr-md-1">
+            <div class=" form-group">
+              <label> username </label>
+              <input class="form-control" formControlName="username" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class=" row">
+          <div class=" col-md-12 pr-md-1">
+            <div class=" form-group">
+              <label> senha </label>
+              <input class=" form-control" formControlName="password" type="password" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-info" *ngIf="!loading" (click)="onSubmit()">Entrar</button>
+          <button class="btn btn-info" *ngIf="loading">
+            <span class="loader2"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

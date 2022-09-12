@@ -1,14 +1,13 @@
+import { UserService } from "src/app/_services/user.service";
 import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { Vaga } from "src/app/_models/vaga";
-import { VagaService } from "src/app/_services/vaga.service";
 
 @Component({
-  selector: "app-vagas",
-  templateUrl: "vagas.component.html",
+  selector: "app-users",
+  templateUrl: "users.component.html",
 })
-export class VagasComponent implements OnInit {
-  vagas: Vaga[] = [];
+export class UsersComponent implements OnInit {
+  users: any;
   removeID: number;
   name: string;
   displayStyle = "none";
@@ -16,20 +15,20 @@ export class VagasComponent implements OnInit {
   loading = false;
 
   constructor(
-    private readonly vagaService: VagaService,
+    private readonly userService: UserService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.loading = true;
-    this.vagaService.getAll().subscribe({
+    this.userService.findAll().subscribe({
       next: (data) => {
         this.loading = false;
-        this.vagas = data;
+        this.users = data;
       },
       error: () => {
         this.loading = false;
-        this.toastr.info("Ocorreu um erro! ", "Erro ao buscar vagas", {
+        this.toastr.info("Ocorreu um erro! ", "Erro ao buscar users", {
           disableTimeOut: false,
           closeButton: true,
           enableHtml: true,
@@ -42,15 +41,16 @@ export class VagasComponent implements OnInit {
 
   remove(id: number) {
     this.displayStyle = "none";
-    this.vagaService.remove(id).subscribe({
+
+    this.userService.remove(id).subscribe({
       next: () => {
-        this.vagas = this.vagas.filter((elem) => {
+        this.users = this.users.filter((elem) => {
           if (elem.id !== id) {
             return elem;
           }
         });
         this.toastr.info(
-          '<span class="tim-icons icon-check-2" [data-notify]="icon"></span> Vaga removida com sucesso! ',
+          '<span class="tim-icons icon-check-2" [data-notify]="icon"></span> User removido com sucesso! ',
           "",
           {
             disableTimeOut: false,

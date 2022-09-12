@@ -1,5 +1,5 @@
 <div class=" content">
-  <button class=" btn btn-fill btn-danger float-right" routerLink="/nova-noticia">Inserir noticia</button>
+  <button class=" btn btn-fill btn-danger float-right" routerLink="/novo-user">Inserir user</button>
   <div class="clearfix"></div>
   <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog" role="document">
@@ -26,16 +26,17 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Todas noticias</h4>
+          <h4 class=" card-title">Users</h4>
         </div>
         <div class=" card-body">
           <div class=" table-responsive">
             <table class=" table tablesorter" id="">
               <thead class=" text-primary">
                 <tr>
-                  <th>Titulo</th>
-                  <th>Sub Titulo</th>
-                  <th>Status</th>
+                  <th>username</th>
+                  <th>email</th>
+                  <th>papel</th>
+                  <th>estado</th>
                   <th class=" text-center">Acções</th>
                 </tr>
               </thead>
@@ -44,22 +45,30 @@
                 <tr *ngIf="loading;else showTable">
                   <td [attr.colspan]="5"><span class="loader"></span></td>
                 </tr>
+
                 <ng-template #showTable>
-                  <tr *ngFor="let noticia of noticias; let i = index">
-                    <td>{{noticia.title}}</td>
-                    <td>{{noticia.subTitle}}</td>
-                    <td>{{noticia.status}}</td>
+                  <tr *ngFor="let user of users; let i = index">
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                      <span *ngIf="user.role==='SUPERADMIN';else admin">Super Administrador</span>
+                      <ng-template #admin>Administrador</ng-template>
+                    </td>
+                    <td>
+                      <span *ngIf="user.enabled;else disabled">Activo</span>
+                      <ng-template #disabled>Bloqueado</ng-template>
+                    </td>
                     <td class=" text-center">
                       <div data-toggle="buttons" class="btn-group btn-group-toggle">
-                        <label class="btn btn-sm btn-warning btn-simple" [routerLink]="['/nova-noticia', noticia.id]">
+                        <label class="btn btn-sm btn-warning btn-simple" [routerLink]="['/editar-user', user.username]">
                           <input name="options" type="radio" class="d-none d-sm-none">
-                          <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Editar</span>
+                          <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">editar</span>
                           <span class="d-block d-sm-none">
                             <i class="tim-icons icon-gift-2"></i>
                           </span>
                         </label>
                         <label class="btn btn-sm btn-danger btn-simple"><input name="options" type="radio"
-                            class="d-none" (click)="openPopup(noticia.title,noticia.id, i)"><span
+                            class="d-none" (click)="openPopup(user.title,user.id, i)"><span
                             class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                             remover
                           </span><span class="d-block d-sm-none"><i class="tim-icons icon-tap-02"></i></span>

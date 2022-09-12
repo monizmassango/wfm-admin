@@ -19,6 +19,18 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-badge",
     class: "",
   },
+  {
+    path: "/vagas-recebidas",
+    title: "Vagas Recebidas",
+    icon: "icon-badge",
+    class: "",
+  },
+  {
+    path: "/users",
+    title: "Users",
+    icon: "icon-single-02",
+    class: "",
+  },
 ];
 
 // export const ROUTES: RouteInfo[] = [

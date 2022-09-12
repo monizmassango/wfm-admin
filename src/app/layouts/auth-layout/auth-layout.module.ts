@@ -1,22 +1,22 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthLayoutRoutes } from './auth-layout.routing';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { RtlComponent } from '../../pages/rtl/rtl.component';
+import { AuthLayoutRoutes } from "./auth-layout.routing";
+import { LoginComponent } from "./../../pages/login/login.component";
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
   ],
-  declarations: [
-    RtlComponent,
-  ]
+  declarations: [LoginComponent],
 })
-export class AuthLayoutModule { }
+export class AuthLayoutModule {}

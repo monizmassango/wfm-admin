@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 
+import { AuthGuard } from "./_helpers/auth.guard";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   {
     path: "",
     component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: "",
@@ -40,18 +42,12 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "dashboard",
+    redirectTo: "noticias",
   },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: true,
-    }),
-  ],
+  imports: [CommonModule, BrowserModule, RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

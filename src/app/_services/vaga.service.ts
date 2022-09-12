@@ -11,10 +11,7 @@ export class VagaService {
   constructor(private http: HttpClient) {}
 
   create(vaga: Vaga): Observable<any> {
-    return this.http.post(
-      `${environment.api}/vagas/createOrUpdate`,
-      vaga
-    );
+    return this.http.post(`${environment.api}/vagas/createOrUpdate`, vaga);
   }
 
   imagem(formData: FormData): Observable<any> {
@@ -39,5 +36,21 @@ export class VagaService {
 
   remove(ID: number): Observable<any> {
     return this.http.delete(`${environment.api}/vagas/delete/${ID}`);
+  }
+
+  userNotApproved() {
+    return this.http.get(`${environment.api}/vagas/findAllNotEndedNotApproved`);
+  }
+
+  userApproved() {
+    return this.http.get(`${environment.api}/vagas/findAllNotEndedApproved`);
+  }
+
+  aprovarVaga(id: any) {
+    return this.http.put(`${environment.api}/vagas/aprovarVaga/${id}`, {});
+  }
+
+  userAll() {
+    return this.http.get(`${environment.api}/vagas/findAllNotEnded`);
   }
 }

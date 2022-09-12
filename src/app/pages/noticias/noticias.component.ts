@@ -13,6 +13,7 @@ export class NoticiasComponent implements OnInit {
   name: string;
   displayStyle = "none";
   index: number;
+  loading = false;
 
   constructor(
     private readonly noticiaService: NoticiaService,
@@ -20,11 +21,22 @@ export class NoticiasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.noticiaService.getAll().subscribe({
       next: (data) => {
+        this.loading = false;
         this.noticias = data;
       },
-      error: () => console.log("error"),
+      error: () => {
+        this.toastr.info("Ocorreu um erro! ", "Erro ao buscar noticias", {
+          disableTimeOut: false,
+          closeButton: true,
+          enableHtml: true,
+          toastClass: "alert alert-danger alert-with-icon",
+          positionClass: "toast-top-right",
+        });
+        this.loading = false;
+      },
     });
   }
 
@@ -32,7 +44,11 @@ export class NoticiasComponent implements OnInit {
     this.displayStyle = "none";
     this.noticiaService.remove(id).subscribe({
       next: () => {
-        this.ngOnInit();
+        this.noticias = this.noticias.filter((elem) => {
+          if (elem.id !== id) {
+            return elem;
+          }
+        });
         this.toastr.info(
           '<span class="tim-icons icon-check-2" [data-notify]="icon"></span> Noticia removida com sucesso! ',
           "",
