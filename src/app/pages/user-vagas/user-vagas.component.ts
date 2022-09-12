@@ -15,18 +15,30 @@ export class UserVagasComponent implements OnInit {
   currentButton = "";
   loading = false;
 
+  term = "";
+  limitStart = 0;
+  limitEnd = 6;
+  pages = 0;
+  buttons: Buttons[] = [];
+
   constructor(
     private readonly vagaService: VagaService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit() {
+    this.limitStart = 0;
+    this.limitEnd = 6;
+    this.pages = 0;
+    this.buttons = [];
     this.loading = true;
     this.currentButton = "Todas vagas";
     this.vagaService.userAll().subscribe({
       next: (data) => {
         this.loading = false;
         this.vagas = data;
+        this.pages = Math.ceil(data.length / 6);
+        this.generateButtons();
       },
       error: () => {
         this.loading = false;
@@ -85,12 +97,18 @@ export class UserVagasComponent implements OnInit {
   }
 
   naoAprovado() {
+    this.limitStart = 0;
+    this.limitEnd = 6;
+    this.pages = 0;
+    this.buttons = [];
     this.loading = true;
     this.currentButton = "Todas não aprovadas";
     this.vagaService.userNotApproved().subscribe({
       next: (data) => {
         this.loading = false;
         this.vagas = data;
+        this.pages = Math.ceil(data.length / 6);
+        this.generateButtons();
       },
       error: () => {
         this.loading = false;
@@ -106,12 +124,18 @@ export class UserVagasComponent implements OnInit {
   }
 
   aprovado() {
+    this.limitStart = 0;
+    this.limitEnd = 6;
+    this.pages = 0;
+    this.buttons = [];
     this.loading = true;
     this.currentButton = "Todas aprovadas";
     this.vagaService.userApproved().subscribe({
       next: (data) => {
         this.vagas = data;
         this.loading = false;
+        this.pages = Math.ceil(data.length / 6);
+        this.generateButtons();
       },
       error: () => {
         this.loading = false;
@@ -126,6 +150,21 @@ export class UserVagasComponent implements OnInit {
     });
   }
 
+  generateButtons() {
+    let start = 0;
+    let end = 6;
+    for (let index = 0; index < this.pages; index++) {
+      this.buttons.push({ start: start, end: end });
+      start = start + 6;
+      end = end + 6;
+    }
+  }
+
+  onClick(start, end) {
+    this.limitStart = start;
+    this.limitEnd = end;
+  }
+
   openPopup(name, id, index) {
     this.name = name;
     this.removeID = id;
@@ -137,4 +176,8 @@ export class UserVagasComponent implements OnInit {
     this.name = undefined;
     this.removeID = undefined;
   }
+}
+interface Buttons {
+  start: number;
+  end: number;
 }

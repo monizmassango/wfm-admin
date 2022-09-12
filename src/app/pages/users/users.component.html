@@ -1,4 +1,7 @@
 <div class=" content">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" [(ngModel)]="term" placeholder="pesquise aqui!...">
+  </div>
   <button class=" btn btn-fill btn-danger float-right" routerLink="/novo-user">Inserir user</button>
   <div class="clearfix"></div>
   <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
@@ -47,7 +50,7 @@
                 </tr>
 
                 <ng-template #showTable>
-                  <tr *ngFor="let user of users; let i = index">
+                  <tr *ngFor="let user of users | filter: term | slice:limitStart:limitEnd; let i = index">
                     <td>{{user.username}}</td>
                     <td>{{user.email}}</td>
                     <td>
@@ -79,6 +82,12 @@
                 </ng-template>
               </tbody>
             </table>
+            <nav>
+              <ul class="pagination pagination-sm">
+                <li class="page-item" *ngFor="let btn of buttons; let index = index"><a class="page-link"
+                    (click)="onClick(btn.start, btn.end)">{{index}}</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

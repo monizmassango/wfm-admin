@@ -14,6 +14,12 @@ export class UsersComponent implements OnInit {
   index: number;
   loading = false;
 
+  term = "";
+  limitStart = 0;
+  limitEnd = 6;
+  pages = 0;
+  buttons: Buttons[] = [];
+
   constructor(
     private readonly userService: UserService,
     private toastr: ToastrService
@@ -25,6 +31,8 @@ export class UsersComponent implements OnInit {
       next: (data) => {
         this.loading = false;
         this.users = data;
+        this.pages = Math.ceil(data.length / 6);
+        this.generateButtons();
       },
       error: () => {
         this.loading = false;
@@ -64,6 +72,21 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  generateButtons() {
+    let start = 0;
+    let end = 6;
+    for (let index = 0; index < this.pages; index++) {
+      this.buttons.push({ start: start, end: end });
+      start = start + 6;
+      end = end + 6;
+    }
+  }
+
+  onClick(start, end) {
+    this.limitStart = start;
+    this.limitEnd = end;
+  }
+
   openPopup(name, id, index) {
     this.name = name;
     this.removeID = id;
@@ -75,4 +98,9 @@ export class UsersComponent implements OnInit {
     this.name = undefined;
     this.removeID = undefined;
   }
+}
+
+interface Buttons {
+  start: number;
+  end: number;
 }

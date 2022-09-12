@@ -19,6 +19,7 @@ import { NovaVagaComponent } from "src/app/pages/nova-vaga/nova-vaga.component";
 import { UserVagasComponent } from "src/app/pages/user-vagas/user-vagas.component";
 import { NovoUserComponent } from "src/app/pages/novo-user/novo-user.component";
 import { UsersComponent } from "src/app/pages/users/users.component";
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { UsersComponent } from "src/app/pages/users/users.component";
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     DashboardComponent,

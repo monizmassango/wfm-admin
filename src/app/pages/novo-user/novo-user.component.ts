@@ -1,5 +1,8 @@
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DomSanitizer } from "@angular/platform-browser";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute } from "@angular/router";
@@ -11,14 +14,14 @@ import { UserService } from "src/app/_services/user.service";
   templateUrl: "novo-user.component.html",
 })
 export class NovoUserComponent implements OnInit {
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   data: any;
   image: any;
   userName: string;
   error = "";
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
     private route: ActivatedRoute

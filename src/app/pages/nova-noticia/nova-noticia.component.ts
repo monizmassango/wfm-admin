@@ -1,5 +1,5 @@
 import { NoticiaService } from "./../../_services/noticia.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 
 import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
@@ -12,13 +12,13 @@ import { Noticia } from "src/app/_models/noticias";
   templateUrl: "nova-noticia.component.html",
 })
 export class NovaNoticiaComponent implements OnInit {
-  noticiaForm: FormGroup;
+  noticiaForm: UntypedFormGroup;
   data: any;
   image: any;
   noticiaId: number;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private noticiaService: NoticiaService,
     private toastr: ToastrService,
     private route: ActivatedRoute,

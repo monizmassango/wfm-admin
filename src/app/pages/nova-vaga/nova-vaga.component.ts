@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
@@ -12,13 +12,13 @@ import { Vaga } from "src/app/_models/vaga";
   templateUrl: "nova-vaga.component.html",
 })
 export class NovaVagaComponent implements OnInit {
-  vagaForm: FormGroup;
+  vagaForm: UntypedFormGroup;
   data: any;
   image: any;
   vagaId: number;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private vagaService: VagaService,
     private toastr: ToastrService,
     private route: ActivatedRoute,

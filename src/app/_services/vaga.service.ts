@@ -38,11 +38,11 @@ export class VagaService {
     return this.http.delete(`${environment.api}/vagas/delete/${ID}`);
   }
 
-  userNotApproved() {
+  userNotApproved(): Observable<any> {
     return this.http.get(`${environment.api}/vagas/findAllNotEndedNotApproved`);
   }
 
-  userApproved() {
+  userApproved(): Observable<any> {
     return this.http.get(`${environment.api}/vagas/findAllNotEndedApproved`);
   }
 
@@ -50,7 +50,7 @@ export class VagaService {
     return this.http.put(`${environment.api}/vagas/aprovarVaga/${id}`, {});
   }
 
-  userAll() {
+  userAll(): Observable<any> {
     return this.http.get(`${environment.api}/vagas/findAllNotEnded`);
   }
 }

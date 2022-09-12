@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
@@ -11,12 +11,12 @@ import { UserService } from "src/app/_services/user.service";
   templateUrl: "login.component.html",
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   loading = false;
   returnUrl = "";
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
     private router: Router,

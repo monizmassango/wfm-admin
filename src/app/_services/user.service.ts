@@ -9,10 +9,10 @@ import { map, Observable } from "rxjs";
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  create(userData: any) {
+  create(userData: any): Observable<any> {
     return this.http.post(`${environment.api}/user/createUser`, userData);
   }
-  findAll() {
+  findAll(): Observable<any> {
     return this.http.get(`${environment.api}/user/findAll`);
   }
   remove(id: any) {
