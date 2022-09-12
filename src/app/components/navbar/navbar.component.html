@@ -21,7 +21,7 @@
         <li class=" nav-item" ngbDropdown>
           <a class=" nav-link" data-toggle="dropdown" href="javascript:void(0)" ngbDropdownToggle>
             <div class=" photo">
-              <img alt="Profile Photo" src="assets/img/anime3.png" />
+              <img alt="Profile Photo" src="assets/img/logo.png" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p class=" d-lg-none">Log out</p>
@@ -29,7 +29,7 @@
           <ul class=" dropdown-navbar" ngbDropdownMenu>
             <li class=" dropdown-divider"></li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" href="javascript:void(0)" (click)="logout()" ngbDropdownItem>
                 Log out
               </a>
             </li>
